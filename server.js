@@ -14,8 +14,8 @@ const MAX_TEXT = 2000;
 let db = { users: [], messages: [], sessions: {} };
 if (fs.existsSync(DATA_FILE)) db = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
 // Feste Konten aus der Umgebungsvariable SEED_USERS, damit sie Neustarts auf dem Render Free Plan überleben.
-// Format: "Name:PIN:admin;Name:PIN;..." (":admin" nur für Chefs)
-for (const entry of (process.env.SEED_USERS || '').split(';')) {
+// Format: "Name:PIN:admin;Name:PIN;..." (":admin" nur für Chefs, Trenner ; , oder Zeilenumbruch)
+for (const entry of (process.env.SEED_USERS || '').split(/[;,\n]/)) {
   const [rawName, pin, role] = entry.split(':').map(s => (s || '').trim());
   const name = String(rawName || '').trim().slice(0, 40);
   if (!name || !/^\d{4,8}$/.test(pin || '')) continue;

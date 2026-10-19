@@ -36,7 +36,7 @@ In Render unter **team-chat > Environment** die Variable `SEED_USERS` anlegen. B
 Theo:1234:admin;Mehmet:5555;Ali:7777
 ```
 
-Format: `Name:PIN` pro Person, getrennt mit `;`. `:admin` dahinter heißt: darf Ankündigungen posten und Mitarbeiter verwalten. Sobald dort ein Chef steht, kann sich niemand mehr über die Einrichtung zum Chef machen. Die PINs stehen nur in Render, nicht im (öffentlichen) Code.
+Format: `Name:PIN` pro Person, getrennt mit `;` (Komma oder neue Zeile geht auch). `:admin` dahinter heißt: darf Ankündigungen posten und Mitarbeiter verwalten. Sobald dort ein Chef steht, kann sich niemand mehr über die Einrichtung zum Chef machen. Die PINs stehen nur in Render, nicht im (öffentlichen) Code.
 
 Nachrichten gehen auf dem Free Plan weiterhin bei jedem Neustart verloren. Konten, die nur in der App angelegt wurden, ebenfalls.
 

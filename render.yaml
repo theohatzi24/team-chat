@@ -1,0 +1,16 @@
+# Render Blueprint: kleinster bezahlter Server (0.5 CPU, 512 MB) plus 1 GB Festplatte für die Daten
+services:
+  - type: web
+    name: team-chat
+    runtime: node
+    plan: 0.5c-512mb
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/status
+    envVars:
+      - key: DATA_FILE
+        value: /var/data/db.json
+    disk:
+      name: team-chat-data
+      mountPath: /var/data
+      sizeGB: 1

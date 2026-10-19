@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2e7d32">
+  <title>Team Chat</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Anmeldung / Einrichtung -->
+  <section id="login" class="screen hidden">
+    <div class="card">
+      <div class="logo">🥕</div>
+      <h1 id="loginTitle">Anmelden</h1>
+      <p id="loginHint" class="muted"></p>
+      <form id="loginForm">
+        <input id="loginName" placeholder="Dein Name" autocomplete="username" required>
+        <input id="loginPin" placeholder="PIN" inputmode="numeric" pattern="\d{4,8}" type="password" autocomplete="current-password" required>
+        <button type="submit" id="loginBtn">Anmelden</button>
+        <p id="loginError" class="error"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Hauptansicht -->
+  <section id="main" class="screen hidden">
+    <header>
+      <nav id="tabs">
+        <button data-tab="team" class="active">💬 Team</button>
+        <button data-tab="news">📢 Ankündigungen <span id="newsBadge" class="badge hidden"></span></button>
+        <button data-tab="admin" id="adminTab" class="hidden">👥</button>
+      </nav>
+      <button id="logoutBtn" title="Abmelden">⏻</button>
+    </header>
+
+    <div id="messages" class="messages"></div>
+
+    <div id="adminPanel" class="admin hidden">
+      <h2>Mitarbeiter</h2>
+      <ul id="userList"></ul>
+      <h3>Neuen Mitarbeiter anlegen</h3>
+      <form id="addUserForm">
+        <input id="newName" placeholder="Name" required>
+        <input id="newPin" placeholder="PIN (4 bis 8 Ziffern)" inputmode="numeric" pattern="\d{4,8}" required>
+        <label class="check"><input type="checkbox" id="newAdmin"> darf Ankündigungen posten (Chef)</label>
+        <button type="submit">Anlegen</button>
+        <p id="adminError" class="error"></p>
+      </form>
+    </div>
+
+    <form id="composer">
+      <textarea id="text" rows="1" placeholder="Nachricht schreiben…" maxlength="2000"></textarea>
+      <button type="submit" aria-label="Senden">➤</button>
+    </form>
+    <p id="readonlyHint" class="readonly hidden">Nur der Chef kann hier posten.</p>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

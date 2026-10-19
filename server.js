@@ -13,6 +13,17 @@ const MAX_TEXT = 2000;
 // ---------- Speicher ----------
 let db = { users: [], messages: [], sessions: {} };
 if (fs.existsSync(DATA_FILE)) db = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+// Feste Konten aus der Umgebungsvariable SEED_USERS, damit sie Neustarts auf dem Render Free Plan überleben.
+// Format: "Name:PIN:admin;Name:PIN;..." (":admin" nur für Chefs)
+for (const entry of (process.env.SEED_USERS || '').split(';')) {
+  const [rawName, pin, role] = entry.split(':').map(s => (s || '').trim());
+  const name = String(rawName || '').trim().slice(0, 40);
+  if (!name || !/^\d{4,8}$/.test(pin || '')) continue;
+  if (db.users.some(u => u.name.toLowerCase() === name.toLowerCase())) continue;
+  const salt = crypto.randomBytes(8).toString('hex');
+  db.users.push({ id: crypto.randomBytes(8).toString('hex'), name, role: role === 'admin' ? 'admin' : 'staff', salt,
+    pinHash: crypto.scryptSync(pin, salt, 32).toString('hex') });
+}
 let saveTimer = null;
 function save() {
   clearTimeout(saveTimer);

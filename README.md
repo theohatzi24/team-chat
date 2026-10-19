@@ -29,6 +29,17 @@ Optionen: `PORT=8080 node server.js`, Speicherort der Daten mit `DATA_FILE=/pfad
 
 Für den Dauerbetrieb: in `render.yaml` `plan: 0.5c-512mb` setzen und den `disk` Block einkommentieren. Kosten: 7 $ + 1 GB × 0,25 $ = 7,25 $/Monat (render.com/pricing, 19.10.2026).
 
+### Konten dauerhaft behalten (auch auf dem Free Plan)
+In Render unter **team-chat > Environment** die Variable `SEED_USERS` anlegen. Beim Start legt der Server diese Konten automatisch an, auch nach jedem Neustart:
+
+```
+Theo:1234:admin;Mehmet:5555;Ali:7777
+```
+
+Format: `Name:PIN` pro Person, getrennt mit `;`. `:admin` dahinter heißt: darf Ankündigungen posten und Mitarbeiter verwalten. Sobald dort ein Chef steht, kann sich niemand mehr über die Einrichtung zum Chef machen. Die PINs stehen nur in Render, nicht im (öffentlichen) Code.
+
+Nachrichten gehen auf dem Free Plan weiterhin bei jedem Neustart verloren. Konten, die nur in der App angelegt wurden, ebenfalls.
+
 Schritte:
 1. Code in ein GitHub Repository legen.
 2. Auf render.com: New > Blueprint > Repository wählen. Render liest `render.yaml` und legt Server und Festplatte an.

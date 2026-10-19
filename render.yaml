@@ -1,16 +1,18 @@
-# Render Blueprint: kleinster bezahlter Server (0.5 CPU, 512 MB) plus 1 GB Festplatte für die Daten
+# Render Blueprint: Free Plan zum Ausprobieren.
+# Achtung: Beim Free Plan gehen Konten und Nachrichten bei Neustart, Deploy und nach 15 Minuten ohne Zugriffe verloren.
+# Für den Dauerbetrieb: plan auf 0.5c-512mb setzen und den disk Block unten einkommentieren (7,25 $/Monat).
 services:
   - type: web
     name: team-chat
     runtime: node
-    plan: 0.5c-512mb
+    plan: free
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /api/status
-    envVars:
-      - key: DATA_FILE
-        value: /var/data/db.json
-    disk:
-      name: team-chat-data
-      mountPath: /var/data
-      sizeGB: 1
+    # envVars:
+    #   - key: DATA_FILE
+    #     value: /var/data/db.json
+    # disk:
+    #   name: team-chat-data
+    #   mountPath: /var/data
+    #   sizeGB: 1

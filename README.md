@@ -23,9 +23,11 @@ Dann im Browser `http://localhost:3000` öffnen. Beim ersten Start legst du dein
 Optionen: `PORT=8080 node server.js`, Speicherort der Daten mit `DATA_FILE=/pfad/db.json`.
 
 ## Hosting auf Render
-`render.yaml` richtet alles ein: kleinster bezahlter Server (`0.5c-512mb`, 7 $/Monat) plus 1 GB Festplatte unter `/var/data` (0,25 $/GB/Monat). Summe: 7 + 1 × 0,25 = **7,25 $/Monat** (Stand render.com/pricing, 19.10.2026).
+`render.yaml` ist auf den **Free Plan** eingestellt (Entscheidung Theo, 19.10.2026).
 
-Warum nicht der Free Plan: Render löscht beim Free Plan alle Dateiänderungen bei Neustart, Deploy und nach 15 Minuten ohne Zugriffe ("Free web services cannot" persistent disks nutzen, Quelle: render.com/docs/free). Mitarbeiter und Nachrichten wären also ständig weg.
+⚠️ Beim Free Plan löscht Render alle Dateiänderungen bei Neustart, Deploy und nach 15 Minuten ohne Zugriffe (Quelle: render.com/docs/free). Konten und Nachrichten sind dann weg, du musst das Chef Konto neu anlegen. Der erste Aufruf nach einer Pause dauert laut Render etwa eine Minute.
+
+Für den Dauerbetrieb: in `render.yaml` `plan: 0.5c-512mb` setzen und den `disk` Block einkommentieren. Kosten: 7 $ + 1 GB × 0,25 $ = 7,25 $/Monat (render.com/pricing, 19.10.2026).
 
 Schritte:
 1. Code in ein GitHub Repository legen.
